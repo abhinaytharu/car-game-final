@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Car Game</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div id="score-text">Score: 0</div>
+    
+    <!-- Game Over Overlay -->
+    <div class="game-over-overlay" id="game-over-overlay"></div>
+    
+    <!-- Game Over Screen -->
+    <div id="game-over-text">GAME OVER</div>
+    <div id="final-score">Final Score: 0</div>
+    <button id="restart-btn" onclick="restartGame()">Restart Game</button>
+    
+    <!-- Instructions -->
+    <div id="instructions">Use WASD or Arrow Keys to control your car</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="scripts/game.js"></script>
+</body>
+</html>

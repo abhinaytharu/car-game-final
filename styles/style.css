@@ -1,0 +1,166 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Score Display */
+#score-text {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px 25px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+#score-text:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Game Over Screen */
+#game-over-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ff4757;
+    font-size: 72px;
+    font-weight: bold;
+    text-align: center;
+    display: none;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+    z-index: 1001;
+    animation: gameOverPulse 2s infinite;
+}
+
+@keyframes gameOverPulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.1);
+        text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.9);
+    }
+}
+
+/* Restart Button */
+#restart-btn {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 18px 40px;
+    font-size: 22px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: none;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#restart-btn:hover {
+    background: linear-gradient(45deg, #ee5a24, #ff6b6b);
+    transform: translateX(-50%) scale(1.1);
+    box-shadow: 0 12px 35px rgba(255, 107, 107, 0.6);
+}
+
+#restart-btn:active {
+    transform: translateX(-50%) scale(0.95);
+}
+
+/* Game Over Overlay */
+.game-over-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+/* Final Score Display */
+#final-score {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    display: none;
+    z-index: 1001;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px 40px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Instructions */
+#instructions {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    z-index: 999;
+    max-width: 300px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #score-text {
+        font-size: 20px;
+        padding: 12px 20px;
+        top: 15px;
+        left: 15px;
+    }
+    
+    #game-over-text {
+        font-size: 48px;
+    }
+    
+    #restart-btn {
+        font-size: 18px;
+        padding: 15px 30px;
+    }
+    
+    #final-score {
+        font-size: 22px;
+        padding: 15px 30px;
+    }
+    
+    #instructions {
+        font-size: 14px;
+        padding: 8px 16px;
+        max-width: 250px;
+    }
+}
