@@ -525,9 +525,10 @@ function createObstacle(zOffset) {
 function spawnObstacles() {
     if (!playerCar) return;
     const zOffset = playerCar.position.z - roadLength * 3;
-    const numObstacles = Math.floor(Math.random() * 3) + 1; // 1-3 obstacles
+    // Reduce number of obstacles: now only 1 or 2 per spawn
+    const numObstacles = Math.floor(Math.random() * 2) + 1; // 1-2 obstacles
     for (let i = 0; i < numObstacles; i++) {
-        createObstacle(zOffset - i * 15);
+        createObstacle(zOffset - i * 18); // Slightly more spaced out
     }
 }
 
