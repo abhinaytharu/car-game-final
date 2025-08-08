@@ -372,7 +372,7 @@ function init() {
 
     // Car model
     const loader = new THREE.GLTFLoader();
-    loader.load('../assets/cartoon_car.glb', function (gltf) {
+    loader.load('assets/cartoon_car.glb', function (gltf) {
         playerCar = gltf.scene;
         playerCar.scale.set(0.17, 0.17, 0.17);
         playerCar.position.set(positionX, 0.25, positionZ);
@@ -391,7 +391,7 @@ function init() {
     window.addEventListener('resize', onWindowResize);
 
     // Audio
-    engineSound = new Audio('../assets/sound.mp3');
+    engineSound = new Audio('assets/sound.mp3');
     engineSound.loop = true;
 
     // Score update
@@ -422,7 +422,7 @@ function handleKeyUp(e) {
 
 function createRoadSegment(zPosition) {
     const roadGeometry = new THREE.PlaneGeometry(10, roadLength);
-    const roadTexture = new THREE.TextureLoader().load('../assets/road2.jpg');
+    const roadTexture = new THREE.TextureLoader().load('assets/road2.jpg');
     roadTexture.wrapS = THREE.RepeatWrapping;
     roadTexture.wrapT = THREE.RepeatWrapping;
     roadTexture.repeat.set(1, 5);
