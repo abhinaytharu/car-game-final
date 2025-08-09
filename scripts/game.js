@@ -704,95 +704,24 @@ window.restartGame = function() {
 document.addEventListener('DOMContentLoaded', init);
 // Basic loading screen logic
 function showLoadingScreen() {
-    const loadingDiv = document.createElement('div');
-    loadingDiv.id = 'loading-screen';
-    loadingDiv.style.position = 'fixed';
-    loadingDiv.style.top = '0';
-    loadingDiv.style.left = '0';
-    loadingDiv.style.width = '100vw';
-    loadingDiv.style.height = '100vh';
-    loadingDiv.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-    loadingDiv.style.display = 'flex';
-    loadingDiv.style.alignItems = 'center';
-    loadingDiv.style.justifyContent = 'center';
-    loadingDiv.style.zIndex = '9999';
-    loadingDiv.innerHTML = '<span style="color:white;font-size:2rem;font-weight:bold;">Loading...</span>';
-    document.body.appendChild(loadingDiv);
+    const toast = document.getElementById('loading-toast');
+    if (toast) {
+        toast.style.display = 'flex';
+        window.loadingScreenTimeout = setTimeout(() => {
+            window.loadingScreenTimeout = null;
+            hideLoadingScreen();
+        }, 5000);
+    }
 }
 
 function hideLoadingScreen() {
-    const loadingDiv = document.getElementById('loading-screen');
-    if (loadingDiv) loadingDiv.remove();
-}
-
-// Patch init to show/hide loading screen
-const originalInit = init;
-init = function() {
-    showLoadingScreen();
-    let assetsLoaded = 0;
-    let totalAssets = 3; // car model, road texture, sound
-
-    // Override asset loading to track progress
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.BasicShadowMap;
-    renderer.toneMapping = THREE.LinearToneMapping;
-    renderer.toneMappingExposure = 1.0;
-    renderer.outputEncoding = THREE.sRGBEncoding;
-    document.body.appendChild(renderer.domElement);
-
-    createDayEnvironment();
-
-    for (let i = 0; i < 3; i++) {
-        // Road segment loading
-        const roadTexture = new THREE.TextureLoader().load('assets/road2.jpg', function() {
-            assetsLoaded++;
-            if (assetsLoaded === totalAssets) hideLoadingScreen();
-        });
-        roadTexture.wrapS = THREE.RepeatWrapping;
-        roadTexture.wrapT = THREE.RepeatWrapping;
-        roadTexture.repeat.set(1, 5);
-        const roadMaterial = new THREE.MeshLambertMaterial({ map: roadTexture });
-        const road = new THREE.Mesh(new THREE.PlaneGeometry(10, roadLength), roadMaterial);
-        road.rotation.x = -Math.PI / 2;
-        road.position.z = -i * roadLength;
-        road.position.y = 0.01;
-        road.receiveShadow = true;
-        scene.add(road);
-        roadSegments.push(road);
+    if (window.loadingScreenTimeout) {
+        return;
     }
-
-    // Car model
-    const loader = new THREE.GLTFLoader();
-    loader.load('assets/cartoon_car.glb', function (gltf) {
-        playerCar = gltf.scene;
-        playerCar.scale.set(0.17, 0.17, 0.17);
-        playerCar.position.set(positionX, 0.25, positionZ);
-        playerCar.rotation.y = Math.PI;
-        playerCar.castShadow = true;
-        scene.add(playerCar);
-        assetsLoaded++;
-        if (assetsLoaded === totalAssets) hideLoadingScreen();
-    });
-
-    camera.position.set(0, 3, 10);
-    camera.lookAt(0, 0, -50);
-
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
-    window.addEventListener('resize', onWindowResize);
-
-    // Audio
-    engineSound = new Audio('assets/sound.mp3');
-    engineSound.loop = true;
-    engineSound.addEventListener('canplaythrough', function() {
-        assetsLoaded++;
-        if (assetsLoaded === totalAssets) hideLoadingScreen();
-    }, { once: true });
-
-    setInterval(updateScore, 100);
-    animate();
+    const toast = document.getElementById('loading-toast');
+    if (toast) toast.style.display = 'none';
 }
+
+// Show toast loading message on page load
+document.addEventListener('DOMContentLoaded', showLoadingScreen);
+
