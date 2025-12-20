@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +8,49 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/loading.css">
 </head>
+
 <body>
     <div id="loading-toast">
         <div id="loading-text">Loading...</div>
         <div class="loading-spinner">
-            <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
     </div>
     <div id="score-text">Score: 0</div>
-    
+
     <!-- Game Over Overlay -->
     <div class="game-over-overlay" id="game-over-overlay"></div>
-    
+
+    <!-- Pause Overlay -->
+    <div id="pause-overlay">
+        <div id="pause-title">GAME PAUSED</div>
+        <div id="pause-subtitle">Tap to Resume</div>
+    </div>
+
     <!-- Game Over Screen -->
     <div id="game-over-text">GAME OVER</div>
     <div id="final-score">Final Score: 0</div>
     <button id="restart-btn" onclick="restartGame()">Restart Game</button>
-    
+
+    <!-- Mobile Controls -->
+    <div id="mobile-left" class="mobile-ctrl-group pedal-group">
+        <button class="mobile-btn" id="btn-up">▲</button>
+        <button class="mobile-btn" id="btn-down">▼</button>
+    </div>
+
+    <div id="mobile-right" class="mobile-ctrl-group steering-group">
+        <button class="mobile-btn" id="btn-left">◀</button>
+        <button class="mobile-btn" id="btn-right">▶</button>
+    </div>
+
+    <button id="pause-btn">⏸</button>
+
     <!-- Instructions -->
     <div id="instructions">Use WASD or Arrow Keys to control your car</div>
 
@@ -31,4 +58,5 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="scripts/game.js"></script>
 </body>
+
 </html>

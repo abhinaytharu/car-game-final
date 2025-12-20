@@ -45,11 +45,14 @@ body {
 }
 
 @keyframes gameOverPulse {
-    0%, 100% { 
+
+    0%,
+    100% {
         transform: translate(-50%, -50%) scale(1);
         text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
     }
-    50% { 
+
+    50% {
         transform: translate(-50%, -50%) scale(1.1);
         text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.9);
     }
@@ -135,6 +138,56 @@ body {
     max-width: 300px;
 }
 
+/* Pause Overlay */
+#pause-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+#pause-title {
+    color: #ffffff;
+    font-size: 64px;
+    font-weight: 900;
+    letter-spacing: 5px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    margin-bottom: 10px;
+    animation: pausePulse 2s infinite ease-in-out;
+}
+
+#pause-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+@keyframes pausePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     #score-text {
@@ -143,24 +196,123 @@ body {
         top: 15px;
         left: 15px;
     }
-    
+
     #game-over-text {
         font-size: 48px;
     }
-    
+
     #restart-btn {
         font-size: 18px;
         padding: 15px 30px;
     }
-    
+
     #final-score {
         font-size: 22px;
         padding: 15px 30px;
     }
-    
+
     #instructions {
         font-size: 14px;
         padding: 8px 16px;
         max-width: 250px;
+    }
+}
+
+/* Mobile Controls Styling - Ergonimic Split Layout */
+.mobile-ctrl-group {
+    position: absolute;
+    bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1000;
+}
+
+#mobile-left {
+    left: 40px;
+}
+
+#mobile-right {
+    right: 40px;
+}
+
+.steering-group {
+    flex-direction: row !important;
+    gap: 20px;
+}
+
+.pedal-group {
+    flex-direction: column !important;
+    gap: 15px;
+}
+
+.mobile-btn {
+    width: 75px;
+    height: 75px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 18px;
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-btn:active {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+#pause-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1002;
+    transition: all 0.3s ease;
+}
+
+#pause-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+/* Only show on touch devices */
+@media (hover: hover) and (pointer: fine) {
+    .mobile-ctrl-group {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    #mobile-left {
+        left: 20px;
+    }
+
+    #mobile-right {
+        right: 20px;
+    }
+
+    .mobile-btn {
+        width: 65px;
+        height: 65px;
+        font-size: 14px;
     }
 }
